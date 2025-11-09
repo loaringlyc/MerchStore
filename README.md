@@ -1,6 +1,9 @@
-# Assignment 2 - SUSTech Merch Store
+# SUSTech Merch Store
 
-Module: Services & API Architectures
+This an online SUSTech Merch Store where exactly 3 products will be put for sale. The store is externally accessible from a RESTful API Service where customers can check product info, maintain their user info, and submit orders. The RESTful API Service will communicate with other gRPC microservices for different purposes.
+
+Basic architecture for the work is:
+![](https://p.ipic.vip/nukotp.png)
 
 ## Codebase Structure
 

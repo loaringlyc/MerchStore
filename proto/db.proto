@@ -1,0 +1,158 @@
+syntax = "proto3";
+
+package db;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+/*********************************/
+/*      Message Definition       */
+/*********************************/
+message Product {
+  int32 id = 1;
+  string name = 2;
+  string description = 3;
+  string category = 4;
+  double price = 5; 
+  string slogan = 6;
+  int32 stock = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message User {
+  int32 id = 1;
+  string sid = 2;
+  string username = 3;
+  string email = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message Order {
+  int32 id = 1;
+  int32 user_id = 2;
+  int32 product_id = 3;
+  int32 quantity = 4;
+  double total_price = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+
+/*********************************/
+/*      Service Definition       */
+/*********************************/
+service ProductService {
+  rpc CreateProduct(CreateProductRequest) returns (Product);
+  rpc GetProduct(GetProductRequest) returns (Product);
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+  rpc UpdateProduct(Product) returns (Product);
+  rpc DeleteProduct(DeleteProductRequest) returns (google.protobuf.Empty);
+}
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (User);
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (User);
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
+}
+
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (Order);
+  rpc GetOrder(GetOrderRequest) returns (Order);
+  rpc ListOrdersByUser(ListOrdersByUserRequest) returns (ListOrdersResponse);
+  rpc DeleteOrder(DeleteOrderRequest) returns (google.protobuf.Empty);
+}
+
+
+/*************************************************/
+/*      Requst/Response Message Definition       */
+/*************************************************/
+
+// Product Messages 
+
+message CreateProductRequest {
+  string name = 1;
+  string description = 2;
+  string category = 3;
+  double price = 4;
+  string slogan = 5;
+  int32 stock = 6;
+}
+
+message GetProductRequest {
+  int32 id = 1;
+}
+
+message ListProductsRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message ListProductsResponse {
+  repeated Product products = 1;
+}
+
+message DeleteProductRequest {
+  int32 id = 1;
+}
+
+
+// User Messages
+
+message CreateUserRequest {
+  string sid = 1;
+  string username = 2;
+  string email = 3;
+  string password_hash = 4; 
+}
+
+message GetUserRequest {
+  int32 id = 1;
+}
+
+message ListUsersRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+}
+
+message UpdateUserRequest {
+  int32 id = 1;
+  string email = 2;
+  string password_hash = 3; // update password
+}
+
+message DeleteUserRequest {
+  int32 id = 1;
+}
+
+
+// Order Messages
+
+message CreateOrderRequest {
+  int32 user_id = 1;
+  int32 product_id = 2;
+  int32 quantity = 3;
+  double total_price = 4;
+}
+
+message GetOrderRequest {
+  int32 id = 1;
+}
+
+message ListOrdersByUserRequest {
+  int32 user_id = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+}
+
+message DeleteOrderRequest {
+  int32 id = 1;
+}
