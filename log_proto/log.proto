@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package logging;
+
+import "google/protobuf/timestamp.proto";
+
+// logging service
+service LoggingService {
+  rpc RecordLogs(stream LogMessage) returns (RecordLogsResponse);
+}
+
+
+message LogMessage {
+  // logging level, e.g. "INFO", "WARNING", "ERROR"
+  string level = 1;
+
+  // time
+  google.protobuf.Timestamp timestamp = 2;
+
+  // content
+  string message = 3;
+}
+
+message RecordLogsResponse {
+  bool success = 1;
+  uint32 received_count = 2;
+}
