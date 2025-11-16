@@ -4,8 +4,8 @@ from pprint import pprint
 import time
 import os
 
-from .gen import db_pb2
-from .gen import db_pb2_grpc
+from db_proto import db_pb2
+from db_proto import db_pb2_grpc
 
 import psycopg2
 from psycopg2 import pool

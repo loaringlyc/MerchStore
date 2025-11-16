@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import db_pb2 as db__pb2
+from db_proto import db_pb2 as db__proto_dot_db__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 GRPC_GENERATED_VERSION = '1.66.2'
@@ -19,7 +19,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in db_pb2_grpc.py depends on'
+        + f' but the generated code in db_proto/db_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -42,27 +42,27 @@ class ProductServiceStub(object):
         """
         self.CreateProduct = channel.unary_unary(
                 '/db.ProductService/CreateProduct',
-                request_serializer=db__pb2.CreateProductRequest.SerializeToString,
-                response_deserializer=db__pb2.Product.FromString,
+                request_serializer=db__proto_dot_db__pb2.CreateProductRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.Product.FromString,
                 _registered_method=True)
         self.GetProduct = channel.unary_unary(
                 '/db.ProductService/GetProduct',
-                request_serializer=db__pb2.GetProductRequest.SerializeToString,
-                response_deserializer=db__pb2.Product.FromString,
+                request_serializer=db__proto_dot_db__pb2.GetProductRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.Product.FromString,
                 _registered_method=True)
         self.ListProducts = channel.unary_unary(
                 '/db.ProductService/ListProducts',
-                request_serializer=db__pb2.ListProductsRequest.SerializeToString,
-                response_deserializer=db__pb2.ListProductsResponse.FromString,
+                request_serializer=db__proto_dot_db__pb2.ListProductsRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.ListProductsResponse.FromString,
                 _registered_method=True)
         self.UpdateProduct = channel.unary_unary(
                 '/db.ProductService/UpdateProduct',
-                request_serializer=db__pb2.Product.SerializeToString,
-                response_deserializer=db__pb2.Product.FromString,
+                request_serializer=db__proto_dot_db__pb2.Product.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.Product.FromString,
                 _registered_method=True)
         self.DeleteProduct = channel.unary_unary(
                 '/db.ProductService/DeleteProduct',
-                request_serializer=db__pb2.DeleteProductRequest.SerializeToString,
+                request_serializer=db__proto_dot_db__pb2.DeleteProductRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
 
@@ -110,27 +110,27 @@ def add_ProductServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateProduct,
-                    request_deserializer=db__pb2.CreateProductRequest.FromString,
-                    response_serializer=db__pb2.Product.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.CreateProductRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.Product.SerializeToString,
             ),
             'GetProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.GetProduct,
-                    request_deserializer=db__pb2.GetProductRequest.FromString,
-                    response_serializer=db__pb2.Product.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.GetProductRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.Product.SerializeToString,
             ),
             'ListProducts': grpc.unary_unary_rpc_method_handler(
                     servicer.ListProducts,
-                    request_deserializer=db__pb2.ListProductsRequest.FromString,
-                    response_serializer=db__pb2.ListProductsResponse.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.ListProductsRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.ListProductsResponse.SerializeToString,
             ),
             'UpdateProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateProduct,
-                    request_deserializer=db__pb2.Product.FromString,
-                    response_serializer=db__pb2.Product.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.Product.FromString,
+                    response_serializer=db__proto_dot_db__pb2.Product.SerializeToString,
             ),
             'DeleteProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteProduct,
-                    request_deserializer=db__pb2.DeleteProductRequest.FromString,
+                    request_deserializer=db__proto_dot_db__pb2.DeleteProductRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -164,8 +164,8 @@ class ProductService(object):
             request,
             target,
             '/db.ProductService/CreateProduct',
-            db__pb2.CreateProductRequest.SerializeToString,
-            db__pb2.Product.FromString,
+            db__proto_dot_db__pb2.CreateProductRequest.SerializeToString,
+            db__proto_dot_db__pb2.Product.FromString,
             options,
             channel_credentials,
             insecure,
@@ -191,8 +191,8 @@ class ProductService(object):
             request,
             target,
             '/db.ProductService/GetProduct',
-            db__pb2.GetProductRequest.SerializeToString,
-            db__pb2.Product.FromString,
+            db__proto_dot_db__pb2.GetProductRequest.SerializeToString,
+            db__proto_dot_db__pb2.Product.FromString,
             options,
             channel_credentials,
             insecure,
@@ -218,8 +218,8 @@ class ProductService(object):
             request,
             target,
             '/db.ProductService/ListProducts',
-            db__pb2.ListProductsRequest.SerializeToString,
-            db__pb2.ListProductsResponse.FromString,
+            db__proto_dot_db__pb2.ListProductsRequest.SerializeToString,
+            db__proto_dot_db__pb2.ListProductsResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -245,8 +245,8 @@ class ProductService(object):
             request,
             target,
             '/db.ProductService/UpdateProduct',
-            db__pb2.Product.SerializeToString,
-            db__pb2.Product.FromString,
+            db__proto_dot_db__pb2.Product.SerializeToString,
+            db__proto_dot_db__pb2.Product.FromString,
             options,
             channel_credentials,
             insecure,
@@ -272,7 +272,7 @@ class ProductService(object):
             request,
             target,
             '/db.ProductService/DeleteProduct',
-            db__pb2.DeleteProductRequest.SerializeToString,
+            db__proto_dot_db__pb2.DeleteProductRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
@@ -296,27 +296,27 @@ class UserServiceStub(object):
         """
         self.CreateUser = channel.unary_unary(
                 '/db.UserService/CreateUser',
-                request_serializer=db__pb2.CreateUserRequest.SerializeToString,
-                response_deserializer=db__pb2.User.FromString,
+                request_serializer=db__proto_dot_db__pb2.CreateUserRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.User.FromString,
                 _registered_method=True)
         self.GetUser = channel.unary_unary(
                 '/db.UserService/GetUser',
-                request_serializer=db__pb2.GetUserRequest.SerializeToString,
-                response_deserializer=db__pb2.User.FromString,
+                request_serializer=db__proto_dot_db__pb2.GetUserRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.User.FromString,
                 _registered_method=True)
         self.ListUsers = channel.unary_unary(
                 '/db.UserService/ListUsers',
-                request_serializer=db__pb2.ListUsersRequest.SerializeToString,
-                response_deserializer=db__pb2.ListUsersResponse.FromString,
+                request_serializer=db__proto_dot_db__pb2.ListUsersRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.ListUsersResponse.FromString,
                 _registered_method=True)
         self.UpdateUser = channel.unary_unary(
                 '/db.UserService/UpdateUser',
-                request_serializer=db__pb2.UpdateUserRequest.SerializeToString,
-                response_deserializer=db__pb2.User.FromString,
+                request_serializer=db__proto_dot_db__pb2.UpdateUserRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.User.FromString,
                 _registered_method=True)
         self.DeleteUser = channel.unary_unary(
                 '/db.UserService/DeleteUser',
-                request_serializer=db__pb2.DeleteUserRequest.SerializeToString,
+                request_serializer=db__proto_dot_db__pb2.DeleteUserRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
 
@@ -359,27 +359,27 @@ def add_UserServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateUser': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateUser,
-                    request_deserializer=db__pb2.CreateUserRequest.FromString,
-                    response_serializer=db__pb2.User.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.CreateUserRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.User.SerializeToString,
             ),
             'GetUser': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUser,
-                    request_deserializer=db__pb2.GetUserRequest.FromString,
-                    response_serializer=db__pb2.User.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.GetUserRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.User.SerializeToString,
             ),
             'ListUsers': grpc.unary_unary_rpc_method_handler(
                     servicer.ListUsers,
-                    request_deserializer=db__pb2.ListUsersRequest.FromString,
-                    response_serializer=db__pb2.ListUsersResponse.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.ListUsersRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.ListUsersResponse.SerializeToString,
             ),
             'UpdateUser': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateUser,
-                    request_deserializer=db__pb2.UpdateUserRequest.FromString,
-                    response_serializer=db__pb2.User.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.UpdateUserRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.User.SerializeToString,
             ),
             'DeleteUser': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteUser,
-                    request_deserializer=db__pb2.DeleteUserRequest.FromString,
+                    request_deserializer=db__proto_dot_db__pb2.DeleteUserRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -408,8 +408,8 @@ class UserService(object):
             request,
             target,
             '/db.UserService/CreateUser',
-            db__pb2.CreateUserRequest.SerializeToString,
-            db__pb2.User.FromString,
+            db__proto_dot_db__pb2.CreateUserRequest.SerializeToString,
+            db__proto_dot_db__pb2.User.FromString,
             options,
             channel_credentials,
             insecure,
@@ -435,8 +435,8 @@ class UserService(object):
             request,
             target,
             '/db.UserService/GetUser',
-            db__pb2.GetUserRequest.SerializeToString,
-            db__pb2.User.FromString,
+            db__proto_dot_db__pb2.GetUserRequest.SerializeToString,
+            db__proto_dot_db__pb2.User.FromString,
             options,
             channel_credentials,
             insecure,
@@ -462,8 +462,8 @@ class UserService(object):
             request,
             target,
             '/db.UserService/ListUsers',
-            db__pb2.ListUsersRequest.SerializeToString,
-            db__pb2.ListUsersResponse.FromString,
+            db__proto_dot_db__pb2.ListUsersRequest.SerializeToString,
+            db__proto_dot_db__pb2.ListUsersResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -489,8 +489,8 @@ class UserService(object):
             request,
             target,
             '/db.UserService/UpdateUser',
-            db__pb2.UpdateUserRequest.SerializeToString,
-            db__pb2.User.FromString,
+            db__proto_dot_db__pb2.UpdateUserRequest.SerializeToString,
+            db__proto_dot_db__pb2.User.FromString,
             options,
             channel_credentials,
             insecure,
@@ -516,7 +516,7 @@ class UserService(object):
             request,
             target,
             '/db.UserService/DeleteUser',
-            db__pb2.DeleteUserRequest.SerializeToString,
+            db__proto_dot_db__pb2.DeleteUserRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
@@ -540,22 +540,22 @@ class OrderServiceStub(object):
         """
         self.CreateOrder = channel.unary_unary(
                 '/db.OrderService/CreateOrder',
-                request_serializer=db__pb2.CreateOrderRequest.SerializeToString,
-                response_deserializer=db__pb2.Order.FromString,
+                request_serializer=db__proto_dot_db__pb2.CreateOrderRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.Order.FromString,
                 _registered_method=True)
         self.GetOrder = channel.unary_unary(
                 '/db.OrderService/GetOrder',
-                request_serializer=db__pb2.GetOrderRequest.SerializeToString,
-                response_deserializer=db__pb2.Order.FromString,
+                request_serializer=db__proto_dot_db__pb2.GetOrderRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.Order.FromString,
                 _registered_method=True)
         self.ListOrdersByUser = channel.unary_unary(
                 '/db.OrderService/ListOrdersByUser',
-                request_serializer=db__pb2.ListOrdersByUserRequest.SerializeToString,
-                response_deserializer=db__pb2.ListOrdersResponse.FromString,
+                request_serializer=db__proto_dot_db__pb2.ListOrdersByUserRequest.SerializeToString,
+                response_deserializer=db__proto_dot_db__pb2.ListOrdersResponse.FromString,
                 _registered_method=True)
         self.DeleteOrder = channel.unary_unary(
                 '/db.OrderService/DeleteOrder',
-                request_serializer=db__pb2.DeleteOrderRequest.SerializeToString,
+                request_serializer=db__proto_dot_db__pb2.DeleteOrderRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
 
@@ -592,22 +592,22 @@ def add_OrderServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateOrder,
-                    request_deserializer=db__pb2.CreateOrderRequest.FromString,
-                    response_serializer=db__pb2.Order.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.CreateOrderRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.Order.SerializeToString,
             ),
             'GetOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.GetOrder,
-                    request_deserializer=db__pb2.GetOrderRequest.FromString,
-                    response_serializer=db__pb2.Order.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.GetOrderRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.Order.SerializeToString,
             ),
             'ListOrdersByUser': grpc.unary_unary_rpc_method_handler(
                     servicer.ListOrdersByUser,
-                    request_deserializer=db__pb2.ListOrdersByUserRequest.FromString,
-                    response_serializer=db__pb2.ListOrdersResponse.SerializeToString,
+                    request_deserializer=db__proto_dot_db__pb2.ListOrdersByUserRequest.FromString,
+                    response_serializer=db__proto_dot_db__pb2.ListOrdersResponse.SerializeToString,
             ),
             'DeleteOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteOrder,
-                    request_deserializer=db__pb2.DeleteOrderRequest.FromString,
+                    request_deserializer=db__proto_dot_db__pb2.DeleteOrderRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -636,8 +636,8 @@ class OrderService(object):
             request,
             target,
             '/db.OrderService/CreateOrder',
-            db__pb2.CreateOrderRequest.SerializeToString,
-            db__pb2.Order.FromString,
+            db__proto_dot_db__pb2.CreateOrderRequest.SerializeToString,
+            db__proto_dot_db__pb2.Order.FromString,
             options,
             channel_credentials,
             insecure,
@@ -663,8 +663,8 @@ class OrderService(object):
             request,
             target,
             '/db.OrderService/GetOrder',
-            db__pb2.GetOrderRequest.SerializeToString,
-            db__pb2.Order.FromString,
+            db__proto_dot_db__pb2.GetOrderRequest.SerializeToString,
+            db__proto_dot_db__pb2.Order.FromString,
             options,
             channel_credentials,
             insecure,
@@ -690,8 +690,8 @@ class OrderService(object):
             request,
             target,
             '/db.OrderService/ListOrdersByUser',
-            db__pb2.ListOrdersByUserRequest.SerializeToString,
-            db__pb2.ListOrdersResponse.FromString,
+            db__proto_dot_db__pb2.ListOrdersByUserRequest.SerializeToString,
+            db__proto_dot_db__pb2.ListOrdersResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -717,7 +717,7 @@ class OrderService(object):
             request,
             target,
             '/db.OrderService/DeleteOrder',
-            db__pb2.DeleteOrderRequest.SerializeToString,
+            db__proto_dot_db__pb2.DeleteOrderRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
