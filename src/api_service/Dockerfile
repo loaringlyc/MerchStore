@@ -11,8 +11,8 @@ COPY db_proto/ /usr/src/app/db_proto
 COPY log_proto/ /usr/src/app/log_proto
 COPY src/ /usr/src/app/src
 
-ENV PYTHONPATH=/usr/src/app
+ENV PYTHONPATH=/usr/src/app:/usr/src/app/src/api_service/out
 
 EXPOSE 8080
 
-CMD ["python", "-m", "src.api_service.openapi_server.out.openapi_server"]
+CMD ["python", "-m", "openapi_server"]

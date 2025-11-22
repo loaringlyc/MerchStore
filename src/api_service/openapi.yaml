@@ -38,6 +38,7 @@ paths:
       tags:
         - Product
       description: Get all products on sale
+      x-openapi-router-controller: src.api_service.controllers.product_controller
       operationId: list_products
       # no request body is needed
       responses:

@@ -176,7 +176,7 @@ paths:
           description: An array of products
       tags:
       - Product
-      x-openapi-router-controller: openapi_server.controllers.product_controller
+      x-openapi-router-controller: src.api_service.controllers.product_controller
   /products/{productId}:
     get:
       description: Find product by ID
