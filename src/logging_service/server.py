@@ -1,5 +1,6 @@
 import grpc
 import json
+import os
 from concurrent import futures
 from confluent_kafka import Producer
 from google.protobuf.json_format import MessageToDict
@@ -10,9 +11,11 @@ from log_proto import log_pb2_grpc
 class LoggingServiceServicer(log_pb2_grpc.LoggingServiceServicer):
     def __init__(self):
         # initialize Kafka producer
-        self.producer = Producer({'bootstrap.servers': 'localhost:9093'})
+        kafka_server = os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:9093')
+
+        self.producer = Producer({'bootstrap.servers': kafka_server})
         self.topic = 'log-channel'
-        print("Kafka Producer initialized.")
+        print(f"Kafka Producer initialized, connecting to {kafka_server}.")
 
     def RecordLogs(self, request_iterator, context):
         print("Client connected for logging...")

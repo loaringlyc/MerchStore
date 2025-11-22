@@ -17,12 +17,12 @@ from google.protobuf.timestamp_pb2 import Timestamp
 simple_pool = psycopg2.pool.SimpleConnectionPool(
   minconn=1,
   maxconn=10,
-  user="dncc",
+  user=os.getenv("POSTGRES_USER", "dncc"),
   # maybe password need to be read from environment variable for security issue
-  password="dncc",
-  host="localhost",
-  port="5432",
-  database="goodsstore"
+  password=os.getenv("POSTGRES_PASSWORD", "dncc"),
+  host=os.getenv("POSTGRES_HOST", "localhost"),
+  port=os.getenv("POSTGRES_PORT", "5432"),
+  database=os.getenv("POSTGRES_DB", "goodsstore")
 )
 
 class ProductServiceServicer(db_pb2_grpc.ProductServiceServicer):
@@ -103,7 +103,7 @@ class ProductServiceServicer(db_pb2_grpc.ProductServiceServicer):
         
         conn = None
         try:
-            conn = simple_pool.get_conn()
+            conn = simple_pool.getconn()
             with conn.cursor() as cursor:
                 query = """
                     SELECT id, name, description, category, price, slogan, stock, created_at 

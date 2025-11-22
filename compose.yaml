@@ -15,6 +15,13 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data # default PGDATA location: /var/lib/postgresql/data
       - ./db-init:/docker-entrypoint-initdb.d # init run all scripts by default in: /docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - microservices-net
 
   # kafka message queue with zookeeper config management
   zookeeper:
@@ -32,6 +39,8 @@ services:
       timeout: 3s
       retries: 5
       start_period: 1s
+    networks:
+      - microservices-net
 
   kafka:
     # https://hub.docker.com/r/confluentinc/cp-kafka
@@ -67,6 +76,8 @@ services:
       timeout: 3s
       retries: 5
       start_period: 3s
+    networks:
+      - microservices-net
 
   kafka-topic-creator:
     image: confluentinc/cp-kafka:7.7.1
@@ -79,8 +90,63 @@ services:
       bash -c "
       /bin/kafka-topics --create --topic log-channel --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1;
       "
+    networks:
+      - microservices-net
 
   ##### YOUR SERVICES GO BELOW THIS LINE #####
+  db-service:
+    build:
+      context: .
+      dockerfile: src/db_service/Dockerfile
+    ports:
+      - "50051:50051"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - microservices-net
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PORT=5432
+      - PYTHONUNBUFFERED=1 
+
+  logging-service:
+    build:
+      context: .
+      dockerfile: src/logging_service/Dockerfile
+    ports:
+      - "50052:50052"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - microservices-net
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - PYTHONUNBUFFERED=1 # See the log information for debugging
+  
+  api-service:
+    build:
+      context: .
+      dockerfile: src/api_service/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db-service
+      - logging-service
+    networks:
+      - microservices-net
+    environment:
+      - DB_SERVICE_ADDR=db-service:50051
+      - LOGGING_SERVICE_ADDR=logging-service:50052
+      - PYTHONUNBUFFERED=1 
+
+networks:
+  microservices-net:
+    driver: bridge
 
 volumes:
   pg_data: # A placeholder volume without any configuration
