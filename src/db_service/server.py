@@ -296,7 +296,7 @@ class UserServiceServicer(db_pb2_grpc.UserServiceServicer):
     def CreateUser(self, request, context):
         print(f"Received CreateUser request for username: {request.username}")
 
-        # 1. 服务器端校验
+        # server check
         if not all([request.sid, request.username, request.email, request.password_hash]):
             context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
             context.set_details("sid, username, email, and password_hash are required.")
@@ -350,6 +350,55 @@ class UserServiceServicer(db_pb2_grpc.UserServiceServicer):
         finally:
             if conn:
                 simple_pool.putconn(conn)
+    
+    def LoginUser(self, request, context):
+        print(f"Received login request for user: {request.sid}")
+
+        conn = None
+        try:
+            conn = simple_pool.getconn()
+            with conn.cursor() as cursor:
+                query = "SELECT id, sid, username, email, password_hash, created_at FROM users WHERE sid = %s;"
+                cursor.execute(query, (request.sid,))
+                user_row = cursor.fetchone()
+
+                if user_row is None:
+                    context.set_code(grpc.StatusCode.NOT_FOUND)
+                    context.set_details(f"User with SID {request.sid} not found.")
+                    return db_pb2.LoginUserResponse(
+                        success=False,
+                        message=f"User not found"
+                    )
+
+                password_hash = user_row[4]
+                if password_hash == request.password_hash:
+                    response = db_pb2.LoginUserResponse(
+                        success=True,
+                        message="Login successful",
+                        user=db_pb2.User(
+                            id=user_row[0],
+                            sid=user_row[1],
+                            username=user_row[2],
+                            email=user_row[3],
+                            created_at=user_row[5]
+                        )
+                    )
+                    return response
+                else:
+                    return db_pb2.LoginUserResponse(success=False, message="Invalid credentials")
+                
+        except Exception as e:
+            pprint(f"Database error in login user: {e}")
+            context.set_code(grpc.StatusCode.INTERNAL)
+            context.set_details(f"Internal server error: {e}")
+            return db_pb2.LoginUserResponse(
+                success=False,
+                message=f"Login failed for user {request.sid} because of server internal error."
+            )
+        finally:
+            if conn:
+                simple_pool.putconn(conn)
+        
 
     def GetUser(self, request, context):
         print(f"Received GetUser request for ID: {request.id}")

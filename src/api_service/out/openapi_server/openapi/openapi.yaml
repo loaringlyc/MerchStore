@@ -28,7 +28,7 @@ paths:
           description: A successful welcome message
       tags:
       - Greeting
-      x-openapi-router-controller: openapi_server.controllers.greeting_controller
+      x-openapi-router-controller: src.api_service.controllers.greeting_controller
   /orders:
     get:
       operationId: list_orders
@@ -205,7 +205,7 @@ paths:
           description: Product not found
       tags:
       - Product
-      x-openapi-router-controller: openapi_server.controllers.product_controller
+      x-openapi-router-controller: src.api_service.controllers.product_controller
   /users/login:
     post:
       operationId: login_user
@@ -220,7 +220,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthToken"
+                $ref: "#/components/schemas/login_user_200_response"
           description: "Successful login, returns an authentication token."
         "401":
           content:
@@ -231,7 +231,7 @@ paths:
       summary: Logs user into the system
       tags:
       - User
-      x-openapi-router-controller: openapi_server.controllers.user_controller
+      x-openapi-router-controller: src.api_service.controllers.user_controller
   /users/me:
     get:
       operationId: get_current_user
@@ -249,7 +249,7 @@ paths:
       summary: Get current user's profile
       tags:
       - User
-      x-openapi-router-controller: openapi_server.controllers.user_controller
+      x-openapi-router-controller: src.api_service.controllers.user_controller
     put:
       operationId: update_current_user
       requestBody:
@@ -279,7 +279,35 @@ paths:
       summary: Update current user's profile
       tags:
       - User
-      x-openapi-router-controller: openapi_server.controllers.user_controller
+      x-openapi-router-controller: src.api_service.controllers.user_controller
+  /users/me/delete:
+    post:
+      operationId: deactivate_user
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+          description: User deleted successfully.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: "Unauthorized, authentication token is missing or invalid."
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error.
+      security:
+      - bearerAuth: []
+      summary: Delete the current user
+      tags:
+      - User
+      x-openapi-router-controller: src.api_service.controllers.user_controller
   /users/register:
     post:
       operationId: register_user
@@ -305,7 +333,7 @@ paths:
       summary: Register a new user
       tags:
       - User
-      x-openapi-router-controller: openapi_server.controllers.user_controller
+      x-openapi-router-controller: src.api_service.controllers.user_controller
 components:
   schemas:
     Message:
@@ -447,19 +475,13 @@ components:
       title: UserLogin
       type: object
     AuthToken:
-      example:
-        access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-        token_type: bearer
       properties:
         access_token:
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-          title: access_token
           type: string
         token_type:
           example: bearer
-          title: token_type
           type: string
-      title: AuthToken
       type: object
     UserInfo:
       example:
@@ -566,6 +588,25 @@ components:
           title: created_at
           type: string
       title: OrderInfo
+      type: object
+    login_user_200_response:
+      example:
+        user:
+          created_at: 2025-11-08T10:00:00Z
+          id: 101
+          email: 12211418@mail.sustech.edu.cn
+          sid: "12211418"
+          username: loring
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      properties:
+        token:
+          description: JWT token for authentication
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+          title: token
+          type: string
+        user:
+          $ref: "#/components/schemas/UserInfo"
+      title: login_user_200_response
       type: object
   securitySchemes:
     bearerAuth:

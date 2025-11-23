@@ -50,6 +50,7 @@ service ProductService {
 
 service UserService {
   rpc CreateUser(CreateUserRequest) returns (User);
+  rpc LoginUser(LoginUserRequest) returns (LoginUserResponse);
   rpc GetUser(GetUserRequest) returns (User);
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
   rpc UpdateUser(UpdateUserRequest) returns (User);
@@ -104,6 +105,17 @@ message CreateUserRequest {
   string username = 2;
   string email = 3;
   string password_hash = 4; 
+}
+
+message LoginUserRequest {
+  string sid = 1;             
+  string password_hash = 2;    
+}
+
+message LoginUserResponse {
+  bool success = 1;           
+  string message = 2;          
+  User user = 3;              
 }
 
 message GetUserRequest {

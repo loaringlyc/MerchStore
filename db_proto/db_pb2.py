@@ -26,7 +26,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x64\x62_proto/db.proto\x12\x02\x64\x62\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\x01\n\x07Product\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x10\n\x08\x63\x61tegory\x18\x04 \x01(\t\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x0e\n\x06slogan\x18\x06 \x01(\t\x12\r\n\x05stock\x18\x07 \x01(\x05\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"p\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0b\n\x03sid\x18\x02 \x01(\t\x12\x10\n\x08username\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x8f\x01\n\x05Order\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07user_id\x18\x02 \x01(\x05\x12\x12\n\nproduct_id\x18\x03 \x01(\x05\x12\x10\n\x08quantity\x18\x04 \x01(\x05\x12\x13\n\x0btotal_price\x18\x05 \x01(\x01\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"y\n\x14\x43reateProductRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x10\n\x08\x63\x61tegory\x18\x03 \x01(\t\x12\r\n\x05price\x18\x04 \x01(\x01\x12\x0e\n\x06slogan\x18\x05 \x01(\t\x12\r\n\x05stock\x18\x06 \x01(\x05\"\x1f\n\x11GetProductRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"4\n\x13ListProductsRequest\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x0e\n\x06offset\x18\x02 \x01(\x05\"5\n\x14ListProductsResponse\x12\x1d\n\x08products\x18\x01 \x03(\x0b\x32\x0b.db.Product\"\"\n\x14\x44\x65leteProductRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"X\n\x11\x43reateUserRequest\x12\x0b\n\x03sid\x18\x01 \x01(\t\x12\x10\n\x08username\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x15\n\rpassword_hash\x18\x04 \x01(\t\"\x1c\n\x0eGetUserRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"1\n\x10ListUsersRequest\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x0e\n\x06offset\x18\x02 \x01(\x05\",\n\x11ListUsersResponse\x12\x17\n\x05users\x18\x01 \x03(\x0b\x32\x08.db.User\"E\n\x11UpdateUserRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x15\n\rpassword_hash\x18\x03 \x01(\t\"\x1f\n\x11\x44\x65leteUserRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"`\n\x12\x43reateOrderRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\x12\n\nproduct_id\x18\x02 \x01(\x05\x12\x10\n\x08quantity\x18\x03 \x01(\x05\x12\x13\n\x0btotal_price\x18\x04 \x01(\x01\"\x1d\n\x0fGetOrderRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"I\n\x17ListOrdersByUserRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\r\n\x05limit\x18\x02 \x01(\x05\x12\x0e\n\x06offset\x18\x03 \x01(\x05\"/\n\x12ListOrdersResponse\x12\x19\n\x06orders\x18\x01 \x03(\x0b\x32\t.db.Order\" \n\x12\x44\x65leteOrderRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x32\xab\x02\n\x0eProductService\x12\x36\n\rCreateProduct\x12\x18.db.CreateProductRequest\x1a\x0b.db.Product\x12\x30\n\nGetProduct\x12\x15.db.GetProductRequest\x1a\x0b.db.Product\x12\x41\n\x0cListProducts\x12\x17.db.ListProductsRequest\x1a\x18.db.ListProductsResponse\x12)\n\rUpdateProduct\x12\x0b.db.Product\x1a\x0b.db.Product\x12\x41\n\rDeleteProduct\x12\x18.db.DeleteProductRequest\x1a\x16.google.protobuf.Empty2\x8b\x02\n\x0bUserService\x12-\n\nCreateUser\x12\x15.db.CreateUserRequest\x1a\x08.db.User\x12\'\n\x07GetUser\x12\x12.db.GetUserRequest\x1a\x08.db.User\x12\x38\n\tListUsers\x12\x14.db.ListUsersRequest\x1a\x15.db.ListUsersResponse\x12-\n\nUpdateUser\x12\x15.db.UpdateUserRequest\x1a\x08.db.User\x12;\n\nDeleteUser\x12\x15.db.DeleteUserRequest\x1a\x16.google.protobuf.Empty2\xf4\x01\n\x0cOrderService\x12\x30\n\x0b\x43reateOrder\x12\x16.db.CreateOrderRequest\x1a\t.db.Order\x12*\n\x08GetOrder\x12\x13.db.GetOrderRequest\x1a\t.db.Order\x12G\n\x10ListOrdersByUser\x12\x1b.db.ListOrdersByUserRequest\x1a\x16.db.ListOrdersResponse\x12=\n\x0b\x44\x65leteOrder\x12\x16.db.DeleteOrderRequest\x1a\x16.google.protobuf.Emptyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x64\x62_proto/db.proto\x12\x02\x64\x62\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\x01\n\x07Product\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x10\n\x08\x63\x61tegory\x18\x04 \x01(\t\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x0e\n\x06slogan\x18\x06 \x01(\t\x12\r\n\x05stock\x18\x07 \x01(\x05\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"p\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0b\n\x03sid\x18\x02 \x01(\t\x12\x10\n\x08username\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x8f\x01\n\x05Order\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07user_id\x18\x02 \x01(\x05\x12\x12\n\nproduct_id\x18\x03 \x01(\x05\x12\x10\n\x08quantity\x18\x04 \x01(\x05\x12\x13\n\x0btotal_price\x18\x05 \x01(\x01\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"y\n\x14\x43reateProductRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x10\n\x08\x63\x61tegory\x18\x03 \x01(\t\x12\r\n\x05price\x18\x04 \x01(\x01\x12\x0e\n\x06slogan\x18\x05 \x01(\t\x12\r\n\x05stock\x18\x06 \x01(\x05\"\x1f\n\x11GetProductRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"4\n\x13ListProductsRequest\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x0e\n\x06offset\x18\x02 \x01(\x05\"5\n\x14ListProductsResponse\x12\x1d\n\x08products\x18\x01 \x03(\x0b\x32\x0b.db.Product\"\"\n\x14\x44\x65leteProductRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"X\n\x11\x43reateUserRequest\x12\x0b\n\x03sid\x18\x01 \x01(\t\x12\x10\n\x08username\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x15\n\rpassword_hash\x18\x04 \x01(\t\"6\n\x10LoginUserRequest\x12\x0b\n\x03sid\x18\x01 \x01(\t\x12\x15\n\rpassword_hash\x18\x02 \x01(\t\"M\n\x11LoginUserResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x16\n\x04user\x18\x03 \x01(\x0b\x32\x08.db.User\"\x1c\n\x0eGetUserRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"1\n\x10ListUsersRequest\x12\r\n\x05limit\x18\x01 \x01(\x05\x12\x0e\n\x06offset\x18\x02 \x01(\x05\",\n\x11ListUsersResponse\x12\x17\n\x05users\x18\x01 \x03(\x0b\x32\x08.db.User\"E\n\x11UpdateUserRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x15\n\rpassword_hash\x18\x03 \x01(\t\"\x1f\n\x11\x44\x65leteUserRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"`\n\x12\x43reateOrderRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\x12\n\nproduct_id\x18\x02 \x01(\x05\x12\x10\n\x08quantity\x18\x03 \x01(\x05\x12\x13\n\x0btotal_price\x18\x04 \x01(\x01\"\x1d\n\x0fGetOrderRequest\x12\n\n\x02id\x18\x01 \x01(\x05\"I\n\x17ListOrdersByUserRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x05\x12\r\n\x05limit\x18\x02 \x01(\x05\x12\x0e\n\x06offset\x18\x03 \x01(\x05\"/\n\x12ListOrdersResponse\x12\x19\n\x06orders\x18\x01 \x03(\x0b\x32\t.db.Order\" \n\x12\x44\x65leteOrderRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x32\xab\x02\n\x0eProductService\x12\x36\n\rCreateProduct\x12\x18.db.CreateProductRequest\x1a\x0b.db.Product\x12\x30\n\nGetProduct\x12\x15.db.GetProductRequest\x1a\x0b.db.Product\x12\x41\n\x0cListProducts\x12\x17.db.ListProductsRequest\x1a\x18.db.ListProductsResponse\x12)\n\rUpdateProduct\x12\x0b.db.Product\x1a\x0b.db.Product\x12\x41\n\rDeleteProduct\x12\x18.db.DeleteProductRequest\x1a\x16.google.protobuf.Empty2\xc5\x02\n\x0bUserService\x12-\n\nCreateUser\x12\x15.db.CreateUserRequest\x1a\x08.db.User\x12\x38\n\tLoginUser\x12\x14.db.LoginUserRequest\x1a\x15.db.LoginUserResponse\x12\'\n\x07GetUser\x12\x12.db.GetUserRequest\x1a\x08.db.User\x12\x38\n\tListUsers\x12\x14.db.ListUsersRequest\x1a\x15.db.ListUsersResponse\x12-\n\nUpdateUser\x12\x15.db.UpdateUserRequest\x1a\x08.db.User\x12;\n\nDeleteUser\x12\x15.db.DeleteUserRequest\x1a\x16.google.protobuf.Empty2\xf4\x01\n\x0cOrderService\x12\x30\n\x0b\x43reateOrder\x12\x16.db.CreateOrderRequest\x1a\t.db.Order\x12*\n\x08GetOrder\x12\x13.db.GetOrderRequest\x1a\t.db.Order\x12G\n\x10ListOrdersByUser\x12\x1b.db.ListOrdersByUserRequest\x1a\x16.db.ListOrdersResponse\x12=\n\x0b\x44\x65leteOrder\x12\x16.db.DeleteOrderRequest\x1a\x16.google.protobuf.Emptyb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -51,30 +51,34 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_DELETEPRODUCTREQUEST']._serialized_end=817
   _globals['_CREATEUSERREQUEST']._serialized_start=819
   _globals['_CREATEUSERREQUEST']._serialized_end=907
-  _globals['_GETUSERREQUEST']._serialized_start=909
-  _globals['_GETUSERREQUEST']._serialized_end=937
-  _globals['_LISTUSERSREQUEST']._serialized_start=939
-  _globals['_LISTUSERSREQUEST']._serialized_end=988
-  _globals['_LISTUSERSRESPONSE']._serialized_start=990
-  _globals['_LISTUSERSRESPONSE']._serialized_end=1034
-  _globals['_UPDATEUSERREQUEST']._serialized_start=1036
-  _globals['_UPDATEUSERREQUEST']._serialized_end=1105
-  _globals['_DELETEUSERREQUEST']._serialized_start=1107
-  _globals['_DELETEUSERREQUEST']._serialized_end=1138
-  _globals['_CREATEORDERREQUEST']._serialized_start=1140
-  _globals['_CREATEORDERREQUEST']._serialized_end=1236
-  _globals['_GETORDERREQUEST']._serialized_start=1238
-  _globals['_GETORDERREQUEST']._serialized_end=1267
-  _globals['_LISTORDERSBYUSERREQUEST']._serialized_start=1269
-  _globals['_LISTORDERSBYUSERREQUEST']._serialized_end=1342
-  _globals['_LISTORDERSRESPONSE']._serialized_start=1344
-  _globals['_LISTORDERSRESPONSE']._serialized_end=1391
-  _globals['_DELETEORDERREQUEST']._serialized_start=1393
-  _globals['_DELETEORDERREQUEST']._serialized_end=1425
-  _globals['_PRODUCTSERVICE']._serialized_start=1428
-  _globals['_PRODUCTSERVICE']._serialized_end=1727
-  _globals['_USERSERVICE']._serialized_start=1730
-  _globals['_USERSERVICE']._serialized_end=1997
-  _globals['_ORDERSERVICE']._serialized_start=2000
-  _globals['_ORDERSERVICE']._serialized_end=2244
+  _globals['_LOGINUSERREQUEST']._serialized_start=909
+  _globals['_LOGINUSERREQUEST']._serialized_end=963
+  _globals['_LOGINUSERRESPONSE']._serialized_start=965
+  _globals['_LOGINUSERRESPONSE']._serialized_end=1042
+  _globals['_GETUSERREQUEST']._serialized_start=1044
+  _globals['_GETUSERREQUEST']._serialized_end=1072
+  _globals['_LISTUSERSREQUEST']._serialized_start=1074
+  _globals['_LISTUSERSREQUEST']._serialized_end=1123
+  _globals['_LISTUSERSRESPONSE']._serialized_start=1125
+  _globals['_LISTUSERSRESPONSE']._serialized_end=1169
+  _globals['_UPDATEUSERREQUEST']._serialized_start=1171
+  _globals['_UPDATEUSERREQUEST']._serialized_end=1240
+  _globals['_DELETEUSERREQUEST']._serialized_start=1242
+  _globals['_DELETEUSERREQUEST']._serialized_end=1273
+  _globals['_CREATEORDERREQUEST']._serialized_start=1275
+  _globals['_CREATEORDERREQUEST']._serialized_end=1371
+  _globals['_GETORDERREQUEST']._serialized_start=1373
+  _globals['_GETORDERREQUEST']._serialized_end=1402
+  _globals['_LISTORDERSBYUSERREQUEST']._serialized_start=1404
+  _globals['_LISTORDERSBYUSERREQUEST']._serialized_end=1477
+  _globals['_LISTORDERSRESPONSE']._serialized_start=1479
+  _globals['_LISTORDERSRESPONSE']._serialized_end=1526
+  _globals['_DELETEORDERREQUEST']._serialized_start=1528
+  _globals['_DELETEORDERREQUEST']._serialized_end=1560
+  _globals['_PRODUCTSERVICE']._serialized_start=1563
+  _globals['_PRODUCTSERVICE']._serialized_end=1862
+  _globals['_USERSERVICE']._serialized_start=1865
+  _globals['_USERSERVICE']._serialized_end=2190
+  _globals['_ORDERSERVICE']._serialized_start=2193
+  _globals['_ORDERSERVICE']._serialized_end=2437
 # @@protoc_insertion_point(module_scope)

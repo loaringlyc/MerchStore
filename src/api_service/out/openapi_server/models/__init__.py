@@ -2,6 +2,7 @@
 # import models into model package
 from openapi_server.models.auth_token import AuthToken
 from openapi_server.models.error import Error
+from openapi_server.models.login_user200_response import LoginUser200Response
 from openapi_server.models.message import Message
 from openapi_server.models.order_info import OrderInfo
 from openapi_server.models.order_item import OrderItem

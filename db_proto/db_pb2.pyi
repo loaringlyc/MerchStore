@@ -111,6 +111,24 @@ class CreateUserRequest(_message.Message):
     password_hash: str
     def __init__(self, sid: _Optional[str] = ..., username: _Optional[str] = ..., email: _Optional[str] = ..., password_hash: _Optional[str] = ...) -> None: ...
 
+class LoginUserRequest(_message.Message):
+    __slots__ = ("sid", "password_hash")
+    SID_FIELD_NUMBER: _ClassVar[int]
+    PASSWORD_HASH_FIELD_NUMBER: _ClassVar[int]
+    sid: str
+    password_hash: str
+    def __init__(self, sid: _Optional[str] = ..., password_hash: _Optional[str] = ...) -> None: ...
+
+class LoginUserResponse(_message.Message):
+    __slots__ = ("success", "message", "user")
+    SUCCESS_FIELD_NUMBER: _ClassVar[int]
+    MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    USER_FIELD_NUMBER: _ClassVar[int]
+    success: bool
+    message: str
+    user: User
+    def __init__(self, success: bool = ..., message: _Optional[str] = ..., user: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+
 class GetUserRequest(_message.Message):
     __slots__ = ("id",)
     ID_FIELD_NUMBER: _ClassVar[int]
