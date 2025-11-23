@@ -67,7 +67,7 @@ paths:
       summary: Get all orders for the user
       tags:
       - Order
-      x-openapi-router-controller: openapi_server.controllers.order_controller
+      x-openapi-router-controller: src.api_service.controllers.order_controller
     post:
       operationId: place_order
       requestBody:
@@ -98,7 +98,7 @@ paths:
       summary: Place a new order
       tags:
       - Order
-      x-openapi-router-controller: openapi_server.controllers.order_controller
+      x-openapi-router-controller: src.api_service.controllers.order_controller
   /orders/{orderId}:
     get:
       operationId: get_order_by_id
@@ -131,7 +131,7 @@ paths:
       summary: Get details of a specific order
       tags:
       - Order
-      x-openapi-router-controller: openapi_server.controllers.order_controller
+      x-openapi-router-controller: src.api_service.controllers.order_controller
   /orders/{orderId}/cancel:
     post:
       operationId: cancel_order
@@ -160,7 +160,7 @@ paths:
       summary: Cancel an existing order
       tags:
       - Order
-      x-openapi-router-controller: openapi_server.controllers.order_controller
+      x-openapi-router-controller: src.api_service.controllers.order_controller
   /products:
     get:
       description: Get all products on sale

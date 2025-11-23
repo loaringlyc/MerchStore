@@ -224,6 +224,7 @@ paths:
       tags:
         - Order
       summary: Get all orders for the user
+      x-openapi-router-controller: src.api_service.controllers.order_controller
       operationId: list_orders
       security:
         - bearerAuth: []
@@ -256,6 +257,7 @@ paths:
       tags:
         - Order
       summary: Place a new order
+      x-openapi-router-controller: src.api_service.controllers.order_controller
       operationId: place_order
       security:
         - bearerAuth: []
@@ -287,6 +289,7 @@ paths:
       tags:
         - Order
       summary: Get details of a specific order
+      x-openapi-router-controller: src.api_service.controllers.order_controller
       operationId: get_order_by_id
       security:
         - bearerAuth: []
@@ -318,6 +321,7 @@ paths:
       tags:
         - Order
       summary: Cancel an existing order
+      x-openapi-router-controller: src.api_service.controllers.order_controller
       operationId: cancelOrder
       security:
         - bearerAuth: []
