@@ -16,7 +16,7 @@ def log_single_message(level: str, message: str):
         
         # create LogMessage object
         log = log_pb2.LogMessage(
-            service_name="api_service",
+            # service_name="api_service",
             level=level,
             timestamp=ts,
             message=message

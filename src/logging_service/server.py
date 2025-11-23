@@ -1,6 +1,7 @@
 import grpc
 import json
 import os
+import traceback
 from concurrent import futures
 from confluent_kafka import Producer
 from google.protobuf.json_format import MessageToDict
@@ -27,13 +28,25 @@ class LoggingServiceServicer(log_pb2_grpc.LoggingServiceServicer):
                 
                 log_dict = MessageToDict(log_message)
                 log_json = json.dumps(log_dict) # change to JSON string
-                self.producer.produce(self.topic, log_json.encode('utf-8')) 
+
+                def delivery_report(err, msg):
+                    if err is not None:
+                        print(f"Message delivery failed: {err}", flush=True)
+                    else:
+                        # print(f"Message delivered to {msg.topic()} [{msg.partition()}]", flush=True)
+                        pass
+
+                self.producer.produce(self.topic, log_json.encode('utf-8'), callback=delivery_report) 
+                self.producer.poll(0)
+
                 print(f"Received and published to Kafka: {log_json}")
 
             self.producer.flush()
 
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"An error occurred type: {type(e)}", flush=True)
+            print(f"An error occurred details: {e}", flush=True)
+            traceback.print_exc()
             return log_pb2.RecordLogsResponse(success=False, received_count=0)
         finally:
             self.producer.flush()
